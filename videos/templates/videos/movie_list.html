@@ -1,0 +1,31 @@
+{% extends "videos/base.html" %}
+{% block content %}
+<form method="get" style="margin-bottom:1rem;display:flex;gap:.5rem">
+  <input type="text" name="q" value="{{q}}" placeholder="Search by title">
+  <button type="submit">Search</button>
+  <a href="{% url 'movie_create' %}" role="button">Add New</a>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>MovieID</th><th>Title</th><th>Director</th><th>Year</th><th>Genre</th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for m in movies %}
+    <tr>
+      <td>{{m.movie_id}}</td>
+      <td><a href="{% url 'movie_detail' m.pk %}">{{m.title}}</a></td>
+      <td>{{m.director_name}}</td>
+      <td>{{m.release_year}}</td>
+      <td>{{m.genre}}</td>
+      <td><a href="{% url 'movie_update' m.pk %}">Edit</a></td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="6">No movies found</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
