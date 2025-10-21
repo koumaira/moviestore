@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moviestore-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moviestore
+  template:
+    metadata:
+      labels:
+        app: moviestore
+    spec:
+      containers:
+      - name: moviestore
+        image: moviestore:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
